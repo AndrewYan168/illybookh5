@@ -22,10 +22,10 @@ export default new Router({
           path: 'home',
           name: 'Home',
           component: function (resolve) {
-            require(['@/pages/Home'], resolve)
+            require(['@/pages/HomeNew'], resolve)
           },
           meta: {
-            title: '咿啦看书'
+            title: '曼妮雅姿'
           }
         },
         {
@@ -35,7 +35,7 @@ export default new Router({
             require(['@/pages/Study'], resolve)
           },
           meta: {
-            title: '咿啦看书'
+            title: '曼妮雅姿'
           }
         },
         {
@@ -45,7 +45,7 @@ export default new Router({
             require(['@/pages/Mine'], resolve)
           },
           meta: {
-            title: '咿啦看书'
+            title: '曼妮雅姿'
           }
         }
       ]

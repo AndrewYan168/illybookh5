@@ -9,12 +9,12 @@
       <tabbar-item link="/index/home" :selected="index === 0">
         <img slot="icon" src="../../static/img/tab_icon_home_default@2x.png">
         <img slot="icon-active" src="../../static/img/tab_icon_home_selected@2x.png">
-        <span slot="label">精选</span>
+        <span slot="label">报单</span>
       </tabbar-item>
       <tabbar-item link="/index/study" :selected="index === 1">
         <img slot="icon" src="../../static/img/tab_icon_study_default@2x.png">
         <img slot="icon-active" src="../../static/img/tab_icon_study_selected@2x.png">
-        <span slot="label">书房</span>
+        <span slot="label">报单列表</span>
       </tabbar-item>
       <tabbar-item link="/index/mine" :selected="index === 2">
         <img slot="icon" src="../../static/img/tab_icon_mine_default@2x.png">

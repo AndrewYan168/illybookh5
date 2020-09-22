@@ -41,7 +41,7 @@ function mainInit (BASE_URL) {
     .then(function (response) {
       Vue.wechat.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: 'wxca187025bd70cab8', // 必填，公众号的唯一标识
+        appId: 'wxd7c9691e83f67b22', // 必填，公众号的唯一标识
         timestamp: response.data.timestamp, // 必填，生成签名的时间戳
         nonceStr: response.data.nonceStr, // 必填，生成签名的随机串
         signature: response.data.signature, // 必填，签名，见附录1
