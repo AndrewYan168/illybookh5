@@ -64,7 +64,7 @@ export default new Router({
       path: '/bindMobile',
       name: 'BindMobile',
       component: function (resolve) {
-        require(['@/pages/BindMobile'], resolve)
+        require(['@/pages/BindMobileNew'], resolve)
       },
       meta: {
         title: '绑定手机号'
