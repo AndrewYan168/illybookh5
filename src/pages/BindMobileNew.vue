@@ -20,7 +20,7 @@
 
       <div class="screen">
         <section class="uploader">
-          <span>上传支付宝付款码图片：</span>
+          <div class="el-sign-header" style="padding-top: 10px; margin-bottom: 10px; text-align: -webkit-left;">上传支付宝付款码：</div>
           <div class="finish_room">
             <div class="finish_room2">
               <div
@@ -31,13 +31,13 @@
               >
                 <img :src="item" class="img">
                 <span >
-              <img src="/static/img/add.svg" alt>
-            </span>
+                  <img src="/static/img/del.png" alt>
+                </span>
               </div>
               <div class="room_add_img" v-show="isAdd2">
-            <span>
-              <img src="/static/img/add.svg">
-            </span>
+                <span>
+                  <img src="/static/img/add_image.png">
+                </span>
                 <input
                   v-if="isEvent"
                   id="upload2"
@@ -45,7 +45,7 @@
                   accept="image/png, image/jpg"
                   multiple="multiple"
                 >
-              </div>
+            </div>
               <div class="zoom_img" @touchmove.prevent v-show="isBig" @click.stop="stop">
                 <img :src="item_big" alt width="300" height="300">
               </div>
@@ -59,25 +59,15 @@
           <loading :show="showOrNot" :text="text"></loading>
         </div>
       </div>
-
-      <!--<div class="el-password" v-show="!showPassword">
-        <input type="password" placeholder="请输入密码" v-model.trim="password">
-        <a href="#/resetPassword">忘记密码</a>
-        <i @click="toShowPassword" class="icon iconfont icon-iconnoshowpassword"></i>
-      </div>-->
-      <!--<div class="el-password" v-show="showPassword">
-        <input type="text" placeholder="请输入密码" v-model.trim="password">
-        <a href="#/resetPassword">忘记密码</a>
-        <i @click="hidePassword" class="icon iconfont icon-icon_showpassword"></i>
-      </div>-->
       <div class="el-btn btn-green" @click="bindMobile">完成</div>
     </div>
   </div>
 </template>
 
 <script>
-import { md5 } from 'vux'
-  import { mapState } from 'vuex'
+import { lrz } from 'lrz'
+import { md5, Loading, TransferDom } from 'vux'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -88,7 +78,7 @@ export default {
       verificationName: '',
       qq: '',
       showOrNot: false,
-      text: "正在上传...",
+      text: '正在上传...',
       isEvent: true,
       showWindow: false,
       isAdd2: true,
@@ -112,7 +102,13 @@ export default {
   activated () {
     console.log(this.$route.query.from)
   },
+  directives: {
+    TransferDom
+  },
   components: {
+    Loading,
+    // TransferDom,
+    lrz
   },
   methods: {
     toShowPassword () {

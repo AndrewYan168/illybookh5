@@ -62,12 +62,12 @@ export default new Router({
     },
     {
       path: '/bindMobile',
-      name: 'BindMobile',
+      name: 'BindMobileNew',
       component: function (resolve) {
         require(['@/pages/BindMobileNew'], resolve)
       },
       meta: {
-        title: '绑定手机号'
+        title: '绑定用户信息'
       }
     },
     {
