@@ -18,45 +18,14 @@
         <input type="text" placeholder="请输入支付宝验证名" v-model.trim="verificationName">
       </div>
 
-      <div class="screen">
-        <section class="uploader">
-          <div class="el-sign-header" style="padding-top: 10px; margin-bottom: 10px; text-align: -webkit-left;">上传支付宝付款码：</div>
-          <div class="finish_room">
-            <div class="finish_room2">
-              <div
-                v-for="(item ,index ) in imgs_report.imgSrc1"
-                class="room_img"
-                @click="changeBig"
-                :key="index"
-              >
-                <img :src="item" class="img">
-                <span >
-                  <img src="/static/img/del.png" alt>
-                </span>
-              </div>
-              <div class="room_add_img" v-show="isAdd2">
-                <span>
-                  <img src="/static/img/add_image.png">
-                </span>
-                <input
-                  v-if="isEvent"
-                  id="upload2"
-                  type="file"
-                  accept="image/png, image/jpg"
-                  multiple="multiple"
-                >
-            </div>
-              <div class="zoom_img" @touchmove.prevent v-show="isBig" @click.stop="stop">
-                <img :src="item_big" alt width="300" height="300">
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- 4.0 弹窗 -->
-        <attention v-if="showWindow" :information="information"></attention>
-        <!-- 7.0 正在上传 -->
-        <div v-transfer-dom>
-          <loading :show="showOrNot" :text="text"></loading>
+      <div class="el-photo-content" style="margin: 0 auto;">
+        <div class="el-imgs" v-for="(item, index) in imgs" :key="index" v-if="imgs.length>0">
+          <img :src="item" alt="" style="width: 140px; height: 140px">
+          <span @click="deletImg(index)"><i class="icon iconfont icon-close"></i></span>
+        </div>
+        <div class="el-upload" v-if="imgs.length<1">
+          <div class="el-upload-img">添加支付宝付款码</div>
+          <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" @change="fileImage">
         </div>
       </div>
       <div class="el-btn btn-green" @click="bindMobile">完成</div>
@@ -68,6 +37,7 @@
 import { lrz } from 'lrz'
 import { md5, Loading, TransferDom } from 'vux'
 import { mapState } from 'vuex'
+import Axios from 'axios'
 export default {
   data () {
     return {
@@ -77,15 +47,8 @@ export default {
       alipay: '',
       verificationName: '',
       qq: '',
-      showOrNot: false,
-      text: '正在上传...',
-      isEvent: true,
-      showWindow: false,
-      isAdd2: true,
-      imgs_report: { imgSrc1: [], imgSrc2: [] },
-      imgs_report_list: [],
-      isBig: false,
-      item_big: ''
+
+      imgs: []
     }
   },
   computed: {
@@ -124,6 +87,29 @@ export default {
         })
         return
       }
+
+      if (this.qq === '') {
+        this.$vux.toast.show({
+          text: 'qq号不能为空'
+        })
+      }
+
+      if (this.alipay === '') {
+        this.$vux.toast.show({
+          text: '支付宝账号不能为空'
+        })
+      }
+
+      if (this.verificationName === '') {
+        this.$vux.toast.show({
+          text: '支付宝验证名称不能为空'
+        })
+      }
+      if (this.imgs.length === 0) {
+        this.$vux.toast.show({
+          text: '支付宝付款码图片改填'
+        })
+      }
       if (/^1[3|4|5|6|7|8|9][0-9]{9}$/.test(this.phone)) {
         if (this.wxUserInfo) {
           let wxUserInfo = JSON.parse(this.wxUserInfo)
@@ -132,7 +118,7 @@ export default {
             method: 'ella.user.bindAndLogin',
             content: JSON.stringify({
               customerName: this.phone,
-              password: md5(this.password),
+              // password: md5(this.password),
               deviceNo: '',
               deviceToken: '',
               clientType: '',
@@ -145,6 +131,8 @@ export default {
               platformType: 'WEIXIN',
               loginFrom: '2',
               loginVerificationType: '0',
+              alipay: this.alipay,
+
               checkCode: ''
             })
           })).then((response) => {
@@ -193,6 +181,27 @@ export default {
           text: '手机号格式不正确'
         })
       }
+    },
+    fileImage (e) {
+      let file = e.target.files[0]
+      let param = new FormData()
+      param.append('file', file)
+      let config = {
+        headers: {'Content-Type': 'multipart/form-data'}
+      }
+      this.$axios.post('/upload_url?media=image&type=order-alipay', param, config)
+        .then(response => {
+          console.log(JSON.stringify(response))
+          this.imgs.push(response.data.file_url)
+        }).catch((error) => {
+          console.log(error)
+          this.$vux.toast.show({
+            text: '上传图片出错了~'
+          })
+        })
+    },
+    deletImg (index) {
+      this.imgs.splice(index, 1)
     }
   }
 }
@@ -291,6 +300,29 @@ export default {
         top: 0;
         background: rgba(0, 0, 0, 0.5);
       }
+    }
+  }
+  .el-upload{
+    height: 250px;
+    width: 250px;
+    background-color: #f6f6f6;
+    color: #aaa;
+    position: relative;
+    .el-upload-img{
+      height: 100%;
+      width: 100%;
+      line-height: 140px;
+      font-size: 12px;
+      text-align: center;
+    }
+    &>input{
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
     }
   }
 

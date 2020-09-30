@@ -33,7 +33,7 @@ QS.SF = function (option) {
 }
 
 function mainInit (BASE_URL) {
-  Axios.defaults.baseURL = BASE_URL + 'api/service'
+  Axios.defaults.baseURL = BASE_URL + 'api/'
   Vue.prototype.$axios = Axios
   Vue.prototype.$QS = QS
 
@@ -171,7 +171,10 @@ if (process.env.NODE_ENV === 'production') {
     })
 } else {
   // let BASE_URL = 'http://dev.ellabook.cn/rest/'
-  let BASE_URL = 'http://api.ellabook.cn/rest/'
+  // let BASE_URL = 'http://api.ellabook.cn/rest/'
+  let BASE_URL = 'http://192.168.3.53:8081/'
   // let BASE_URL = 'http://118.31.171.207:9000/rest/'
   mainInit(BASE_URL)
 }
+
+let BASE_URL_HOST = 'http://192.168.3.53:8081/'
