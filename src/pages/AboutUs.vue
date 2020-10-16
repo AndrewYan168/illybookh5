@@ -3,9 +3,9 @@
     <div class="aboutUs-content">
       <div class="el-aboutUs-top">
         <img src="../../static/img/icon-1024.png" alt="">
-        <h2>咿啦看书2.0.0</h2>
+        <h2>曼妮雅姿报单平台1.0.0</h2>
       </div>
-      <h3>咿啦看书简介：</h3>
+      <h3>曼妮雅姿报单平台简介：</h3>
       <p>咿啦看书是全球首个交互式动画书阅读平台，为3-8岁儿童提供了包含动画、游戏、配音、交互、亲自等阅读和交互于一身的新一代动画书阅读模式。</p>
       <div class="el-aboutUs-line vux-1px-b"></div>
       <h3>官方微信公众号：</h3>

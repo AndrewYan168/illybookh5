@@ -247,7 +247,7 @@ export default new Router({
         require(['@/pages/UserAgreement'], resolve)
       },
       meta: {
-        title: '用户隐私协议-咿啦看书'
+        title: '用户隐私协议-曼妮雅姿官方平台'
       }
     },
     {

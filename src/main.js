@@ -40,7 +40,7 @@ function mainInit (BASE_URL) {
   Axios.get(BASE_URL + 'wxshare/Weixinshare?weixinurl=' + window.location.href)
     .then(function (response) {
       Vue.wechat.config({
-        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: 'wxd7c9691e83f67b22', // 必填，公众号的唯一标识
         timestamp: response.data.timestamp, // 必填，生成签名的时间戳
         nonceStr: response.data.nonceStr, // 必填，生成签名的随机串
@@ -176,5 +176,3 @@ if (process.env.NODE_ENV === 'production') {
   // let BASE_URL = 'http://118.31.171.207:9000/rest/'
   mainInit(BASE_URL)
 }
-
-let BASE_URL_HOST = 'http://192.168.3.53:8081/'

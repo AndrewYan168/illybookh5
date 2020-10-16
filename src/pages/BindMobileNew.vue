@@ -24,7 +24,7 @@
           <span @click="deletImg(index)"><i class="icon iconfont icon-close"></i></span>
         </div>
         <div class="el-upload" v-if="imgs.length<1">
-          <div class="el-upload-img">添加支付宝付款码</div>
+          <div class="el-upload-img" style="font-size: 13px">添加支付宝付款码</div>
           <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" @change="fileImage">
         </div>
       </div>
@@ -35,9 +35,9 @@
 
 <script>
 import { lrz } from 'lrz'
-import { md5, Loading, TransferDom } from 'vux'
+import { Loading, TransferDom } from 'vux'
 import { mapState } from 'vuex'
-import Axios from 'axios'
+// import Axios from 'axios'
 export default {
   data () {
     return {
@@ -107,7 +107,7 @@ export default {
       }
       if (this.imgs.length === 0) {
         this.$vux.toast.show({
-          text: '支付宝付款码图片改填'
+          text: '支付宝付款码图片必填'
         })
       }
       if (/^1[3|4|5|6|7|8|9][0-9]{9}$/.test(this.phone)) {
