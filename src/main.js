@@ -169,7 +169,10 @@ if (process.env.NODE_ENV === 'production') {
     .catch(function (error) {
       console.log(error)
     })
-} else {
+} else if (process.env.NODE_ENV === 'testing') {
+  let BASE_URL = 'http://testapi.mannyartistry.com/'
+  mainInit(BASE_URL)
+} else{
   // let BASE_URL = 'http://dev.ellabook.cn/rest/'
   // let BASE_URL = 'http://api.ellabook.cn/rest/'
   let BASE_URL = 'http://192.168.3.53:8081/'
